@@ -12,5 +12,11 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('procedimentos.index');
 });
+
+Route::resource('procedimentos', 'ProcedimentoController');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
