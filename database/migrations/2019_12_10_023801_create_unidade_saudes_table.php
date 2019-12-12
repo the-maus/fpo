@@ -17,9 +17,7 @@ class CreateUnidadeSaudesTable extends Migration
             $table->bigIncrements('id');
             $table->string('codigo_cnes');
             $table->string('nome');
-            $table->string('tipo_estabelecimento');
             $table->string('endereco');
-            $table->string('bairro');
             $table->string('diretor_clinico');
             $table->enum('horario_funcionamento', array_keys(\App\UnidadeSaude::$horarios_funcionamento));
             $table->enum('natureza_juridica', array_keys(\App\UnidadeSaude::$naturezas_juridicas));

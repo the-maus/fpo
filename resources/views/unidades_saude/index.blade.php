@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('header', 'Procedimentos')
+@section('header', 'Unidades de saúde')
 
 @section('conteudo')
     @if ($message = Session::get('success'))
@@ -24,25 +24,25 @@
         <thead class="thead-light">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Código do procedimento</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Valor unitário</th>
+            <th scope="col">Código CNES</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Endereço</th>
             <th scope="col">Ação</th>
         </tr>
         </thead>
         <tbody>
-        @foreach ($procedimentos as $procedimento)
+        @foreach ($unidades_saude as $unidade_saude)
             <tr>
-                <td>{{$procedimento->id}}</td>
-                <td>{{$procedimento->codigo_procedimento}}</td>
-                <td>{{$procedimento->descricao}}</td>
-                <td>@money($procedimento->valor_unitario)</td>
+                <td>{{$unidade_saude->id}}</td>
+                <td>{{$unidade_saude->codigo_cnes}}</td>
+                <td>{{$unidade_saude->nome}}</td>
+                <td>{{$unidade_saude->endereco}}</td>
                 <td>
                     <div class="row">
-                        <a class="btn btn-primary" style="height:40px" role="button" href="{{route('procedimentos.edit', $procedimento->id)}}">
+                        <a class="btn btn-primary" style="height:40px" role="button" href="{{route('unidades_saude.edit', $unidade_saude->id)}}">
                             <i class="material-icons">edit</i>&nbsp;Editar</a>&nbsp;
-                        <form action="{{ route('procedimentos.destroy', $procedimento->id) }}"
-                              onsubmit="return window.confirm('Deseja realmente remover o procedimento?')" method="POST">
+                        <form action="{{ route('unidades_saude.destroy', $unidade_saude->id) }}"
+                              onsubmit="return window.confirm('Deseja realmente remover a unidade de saúde?')" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"><i class="material-icons">delete</i>&nbsp;Remover</button>

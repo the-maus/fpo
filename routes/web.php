@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('procedimentos.index');
+    return redirect()->route('unidades_saude.index');
 });
 
 Route::resource('procedimentos', 'ProcedimentoController');
@@ -20,3 +20,7 @@ Route::resource('procedimentos', 'ProcedimentoController');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::resource('unidades_saude', 'UnidadeSaudeController')->parameters(['unidades_saude' => 'unidade_saude']);
+
+Route::resource('fpos', 'FpoController');

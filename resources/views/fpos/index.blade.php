@@ -1,6 +1,6 @@
 @extends('base')
 
-@section('header', 'Procedimentos')
+@section('header', 'FPOs')
 
 @section('conteudo')
     @if ($message = Session::get('success'))
@@ -20,29 +20,29 @@
         </div>
     @endif
 
-    <table class="table table-striped" style="table-layout: fixed">
+    <table class="table table-striped">
         <thead class="thead-light">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Código do procedimento</th>
-            <th scope="col">Descrição</th>
-            <th scope="col">Valor unitário</th>
+            <th scope="col">Unidade de saúde</th>
+            <th scope="col">Competência</th>
+            <th scope="col">Valor total</th>
             <th scope="col">Ação</th>
         </tr>
         </thead>
         <tbody>
-        @foreach ($procedimentos as $procedimento)
+        @foreach ($fpos as $fpo)
             <tr>
-                <td>{{$procedimento->id}}</td>
-                <td>{{$procedimento->codigo_procedimento}}</td>
-                <td>{{$procedimento->descricao}}</td>
-                <td>@money($procedimento->valor_unitario)</td>
-                <td>
+                <td>{{$fpo->id}}</td>
+                <td>{{$fpo->unidade_saude()->value('nome')}}</td>
+                <td>{{date('m/Y', strtotime($fpo->cmpt_ini))}}</td>
+                <td>@money($fpo->valor_total)</td>
+                <td style="width: 300px;">
                     <div class="row">
-                        <a class="btn btn-primary" style="height:40px" role="button" href="{{route('procedimentos.edit', $procedimento->id)}}">
-                            <i class="material-icons">edit</i>&nbsp;Editar</a>&nbsp;
-                        <form action="{{ route('procedimentos.destroy', $procedimento->id) }}"
-                              onsubmit="return window.confirm('Deseja realmente remover o procedimento?')" method="POST">
+                        <a class="btn btn-primary" style="height:40px" role="button" href="{{route('fpos.show', $fpo->id)}}">
+                            <i class="material-icons">pageview</i>&nbsp;Visualizar</a>&nbsp;
+                        <form action="{{ route('fpos.destroy', $fpo->id) }}"
+                              onsubmit="return window.confirm('Deseja realmente remover a ficha de programaçãoorçamentária?')" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"><i class="material-icons">delete</i>&nbsp;Remover</button>

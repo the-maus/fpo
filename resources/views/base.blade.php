@@ -4,7 +4,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Ficha de Programação Orçamentária</title>
+    <title>FPO - Ficha de programação orçamentária</title>
 
     <!-- Bootstrap core CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -28,7 +28,7 @@
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="{{route('procedimentos.index')}}">Home</a>
+                <a class="nav-link" href="{{route('fpos.index')}}"><i class="material-icons">home</i></a>
             </li>
 
         </ul>
@@ -38,15 +38,19 @@
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle"  id="dropdownCreate" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false"><i class="material-icons">add_box</i>&nbsp;Cadastrar</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownCreate">
-                    <a class="dropdown-item" href="{{route('procedimentos.create')}}"><i class="material-icons">note_add</i>&nbsp;Procedimento</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownCreate">
+                    <a class="dropdown-item" href="{{route('fpos.create')}}"><i class="material-icons">assignment</i>&nbsp;FPO</a>
+                    <a class="dropdown-item" href="{{route('unidades_saude.create')}}"><i class="material-icons">local_hospital</i>&nbsp;Unidade de saúde</a>
+                    <a class="dropdown-item" href="{{route('procedimentos.create')}}"><i class="material-icons">healing</i>&nbsp;Procedimento</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle"  id="dropdownList" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false"><i class="material-icons">list</i>&nbsp;Listar</a>
-                <div class="dropdown-menu" aria-labelledby="dropdownList">
-                    <a class="dropdown-item" href="{{route('procedimentos.index')}}"><i class="material-icons">note_add</i>&nbsp;Procedimento</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownList">
+                    <a class="dropdown-item" href="{{route('fpos.index')}}"><i class="material-icons">assignment</i>&nbsp;FPO</a>
+                    <a class="dropdown-item" href="{{route('unidades_saude.index')}}"><i class="material-icons">local_hospital</i>&nbsp;Unidade de saúde</a>
+                    <a class="dropdown-item" href="{{route('procedimentos.index')}}"><i class="material-icons">healing</i>&nbsp;Procedimento</a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -79,7 +83,7 @@
     <div class="jumbotron">
         <div class="container">
             <h1 class="display-3">@yield('header')</h1>
-            <p>Ficha de Programação Orçamentária</p>
+            <p>FPO - Ficha de programação orçamentária</p>
         </div>
     </div>
 

@@ -22,15 +22,15 @@
         @method('PUT')
 
         <div class="form-group">
-            <label for="titulo">Código do procedimento</label>
-            <input value="{{$procedimento->codigo_procedimento}}" required type="text" class="form-control" id="codigo_procedimento" name="codigo_procedimento" placeholder="Código do procedimento">
+            <label for="codigo_procedimento">Código do procedimento</label>
+            <input value="{{$procedimento->codigo_procedimento}}" maxlength="255" required type="text" class="form-control" id="codigo_procedimento" name="codigo_procedimento" placeholder="Código do procedimento">
         </div>
         <div class="form-group">
             <label for="descricao">Descrição</label>
-            <input value="{{$procedimento->descricao}}" required type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição do procedimento">
+            <input value="{{$procedimento->descricao}}" maxlength="255" required type="text" class="form-control" id="descricao" name="descricao" placeholder="Descrição do procedimento">
         </div>
         <div class="form-group">
-            <label for="descricao">Valor unitário</label>
+            <label for="valor_unitario">Valor unitário</label>
             <input value="{{$procedimento->valor_unitario}}" required type="number" step="any" class="form-control" id="valor_unitario" name="valor_unitario" placeholder="Valor unitário do procedimento">
         </div>
         <button type="submit" class="btn btn-primary">Salvar</button>

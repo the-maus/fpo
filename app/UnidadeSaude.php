@@ -17,9 +17,7 @@ class UnidadeSaude extends Model
         'id',
         'codigo_cnes',
         'nome',
-        'tipo_estabelecimento',
         'endereco',
-        'bairro',
         'diretor_clinico',
         'horario_funcionamento',
         'natureza_juridica',
@@ -43,12 +41,4 @@ class UnidadeSaude extends Model
         'filantropico' => 'Filantrópico',
         'privado' => 'Privado',
     ];
-
-    /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
-     */
-    public function procedimentos()
-    {
-        return $this->belongsToMany(Procedimento::class)->using(Fpo::class);
-    }
 }

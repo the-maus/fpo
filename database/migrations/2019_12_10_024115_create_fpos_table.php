@@ -16,15 +16,11 @@ class CreateFposTable extends Migration
         Schema::create('fpos', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('unidade_saude_id')->unsigned();
-            $table->bigInteger('procedimento_id')->unsigned();
             $table->foreign('unidade_saude_id')
                 ->references('id')->on('unidade_saudes')
                 ->onDelete('cascade');
-            $table->foreign('procedimento_id')
-                ->references('id')->on('procedimentos')
-                ->onDelete('cascade');
-            $table->integer('quantidade');
             $table->integer('nivel_apuracao');
+            $table->decimal('valor_total', 8, 2);
             $table->date('cmpt_ini');
             $table->timestamps();
         });
