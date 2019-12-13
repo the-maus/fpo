@@ -20,7 +20,10 @@
         </div>
     @endif
 
-    <table class="table table-striped" style="table-layout: fixed">
+    <div class="form-group">
+        <input type="text" class="form-control" id="search-procedimentos" placeholder="Pesquisar">
+    </div>
+    <table class="table table-striped" id="table-procedimentos" style="table-layout: fixed">
         <thead class="thead-light">
         <tr>
             <th scope="col">#</th>
@@ -54,3 +57,6 @@
         </tbody>
     </table>
 @endsection
+@push('scripts')
+    <script src="{{ asset('js/fpo.js') }}"></script>
+@endpush

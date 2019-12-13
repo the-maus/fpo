@@ -42,7 +42,7 @@
                         <a class="btn btn-primary" style="height:40px" role="button" href="{{route('fpos.show', $fpo->id)}}">
                             <i class="material-icons">pageview</i>&nbsp;Visualizar</a>&nbsp;
                         <form action="{{ route('fpos.destroy', $fpo->id) }}"
-                              onsubmit="return window.confirm('Deseja realmente remover a ficha de programaçãoorçamentária?')" method="POST">
+                              onsubmit="return window.confirm('Deseja realmente remover a FPO?')" method="POST">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="btn btn-danger"><i class="material-icons">delete</i>&nbsp;Remover</button>

@@ -6,6 +6,8 @@
 
     <title>FPO - Ficha de programação orçamentária</title>
 
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet" type="text/css" >
+
     <!-- Bootstrap core CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <!-- Custom styles for this template -->
@@ -15,12 +17,14 @@
             vertical-align: middle;
         }
     </style>
+    <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>
+    @stack('scripts')
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand" href="#">FPO</a>
+    <a class="navbar-brand" href="{{route('fpos.index')}}">FPO</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>

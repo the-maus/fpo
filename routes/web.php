@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return redirect()->route('unidades_saude.index');
+    return redirect()->route('fpos.index');
 });
 
 Route::resource('procedimentos', 'ProcedimentoController');

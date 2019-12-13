@@ -23,7 +23,7 @@
 
         <div class="form-group">
             <label for="codigo_procedimento">Código do procedimento</label>
-            <input value="{{$procedimento->codigo_procedimento}}" maxlength="255" required type="text" class="form-control" id="codigo_procedimento" name="codigo_procedimento" placeholder="Código do procedimento">
+            <input value="{{$procedimento->codigo_procedimento}}" maxlength="10" required type="text" class="form-control" id="codigo_procedimento" name="codigo_procedimento" placeholder="Código do procedimento">
         </div>
         <div class="form-group">
             <label for="descricao">Descrição</label>

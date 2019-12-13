@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Fpo;
+use App\Procedimento;
 use App\UnidadeSaude;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -19,6 +21,19 @@ class FpoController extends Controller
     {
         $fpos = Fpo::all();
 
+        /** @var Fpo $fpo */
+        foreach ($fpos as $fpo) {
+            $valor_total = 0;
+            foreach($fpo->procedimentos as $procedimento) {
+                /** @var Pivot $pivot */
+                $quantidade = $procedimento->pivot->quantidade;
+                $valor = floatval($procedimento->valor_unitario);
+                $valor_total += $valor * $quantidade;
+            }
+            $fpo->setValorTotal($valor_total);
+            $fpo->save();
+        }
+
         return view('fpos.index', compact('fpos'));
     }
 
@@ -31,7 +46,8 @@ class FpoController extends Controller
     {
         if (Auth::check()) {
             $unidades = UnidadeSaude::all();
-            return view('fpos.create', compact('unidades'));
+            $procedimentos = Procedimento::all();
+            return view('fpos.create', compact('unidades', 'procedimentos'));
         } else {
             return $this->noAuth();
         }
@@ -47,7 +63,6 @@ class FpoController extends Controller
     {
         $request->validate([
             'unidade_saude_id' => 'required',
-            'valor_total' => 'required',
             'nivel_apuracao' => 'required',
             'cmpt_ini' => 'required',
         ]);
@@ -57,22 +72,56 @@ class FpoController extends Controller
         $cmpt_ini = $request->input('cmpt_ini');
         $cmpt_ini = date('Y-m-d', strtotime($cmpt_ini));
         $data['cmpt_ini'] = $cmpt_ini;
+        $data['valor_total'] = 0;
 
-        Fpo::create($data);
+        /** @var Fpo $fpo */
+        $fpo = Fpo::create($data);
+
+        if (!empty($data['procedimentos'])) {
+            $quantidades_procedimentos = $data['procedimentos'];
+            $ids_procedimentos = array_keys($quantidades_procedimentos);
+            $procedimentos = Procedimento::findMany($ids_procedimentos);
+            $valor_total = 0;
+            foreach ($procedimentos as $procedimento) {
+                $valor_total += $procedimento->valor_unitario * $quantidades_procedimentos[$procedimento->id];
+            }
+
+            $fpo->setValorTotal($valor_total);
+
+            foreach ($quantidades_procedimentos as $id_procedimento => $quantidade) {
+                $fpo->procedimentos()->attach($id_procedimento, ['quantidade' => $quantidade]);
+            }
+
+            $fpo->save();
+        }
 
         return redirect()->route('fpos.index')
-            ->with('success','FPO criado com sucesso.');
+            ->with('success','FPO criada com sucesso.');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Fpo  $fpo
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\Response|RedirectResponse
      */
     public function show(Fpo $fpo)
     {
-        //
+        if (Auth::check()) {
+            $valor_total = 0;
+            foreach($fpo->procedimentos as $procedimento) {
+                /** @var Pivot $pivot */
+                $quantidade = $procedimento->pivot->quantidade;
+                $valor = floatval($procedimento->valor_unitario);
+                $valor_total += $valor * $quantidade;
+            }
+            $fpo->setValorTotal($valor_total);
+            $fpo->save();
+
+            return view('fpos.show', compact('fpo'));
+        } else {
+            return $this->noAuth();
+        }
     }
 
     /**
@@ -106,7 +155,14 @@ class FpoController extends Controller
      */
     public function destroy(Fpo $fpo)
     {
-        //
+        if (Auth::check()) {
+            $fpo->delete();
+
+            return redirect()->route('fpos.index')
+                ->with('success', 'FPO removida com sucesso');
+        } else {
+            return $this->noAuth();
+        }
     }
 
     /**
@@ -117,5 +173,9 @@ class FpoController extends Controller
         return redirect()
             ->route('fpos.index')
             ->with('error', 'É preciso estar logado para realizar esta ação.');
+    }
+
+    private function calculateTotalValue() {
+
     }
 }

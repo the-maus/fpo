@@ -22,7 +22,7 @@
 
         <div class="form-group">
             <label for="codigo_procedimento">Código do procedimento</label>
-            <input required type="text" maxlength="255" class="form-control" id="codigo_procedimento" name="codigo_procedimento" placeholder="Código do procedimento">
+            <input required type="text" maxlength="10" class="form-control" id="codigo_procedimento" name="codigo_procedimento" placeholder="Código do procedimento">
         </div>
         <div class="form-group">
             <label for="descricao">Descrição</label>
